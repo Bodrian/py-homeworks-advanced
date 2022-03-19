@@ -14,28 +14,21 @@ import re
 pattern = '^([А-Я]+[а-я]*)+[ {1}|,{1}]+([А-Я]+[а-я]*)+[ {1}|,{1}]+([А-Я]+[а-я]*)'
 pattern_telefon = '(7|8)[ |(]{0,2}(\d{3})[ |)|-]{0,2}(\d{0,7})[-?]?(\d{0,4})[-?]?(\d{0,2})[ |(]{0,2}(доб)?[\.| ]{0,2}(\d{0,4})'
 
-# ФИО ищем
-n = 1
-print(contacts_list[n])
-print(','.join(contacts_list[n]))
-list1 = re.match(pattern, ','.join(contacts_list[n]))
-print(list1)
-print(list1.group(1))
-print(list1.group(2))
-print(list1.group(3))
-contacts_list[n][0] = list1.group(1)
-contacts_list[n][1] = list1.group(2)
-contacts_list[n][2] = list1.group(3)
-print(contacts_list[1])
+for list in contacts_list:
+  # ФИО ищем
+  list1 = re.match(pattern, ','.join(list))
+  if list1 != None:
+    list[0] = list1.group(1)
+    list[1] = list1.group(2)
+    list[2] = list1.group(3)
 
-#ищем телефон
-telefon = re.search(pattern_telefon, ','.join(contacts_list[n]))
-print(telefon)
-if telefon != None:
-  contacts_list[n][5] = f'+{telefon.group(1)}({telefon.group(2)}){telefon.group(3)}{telefon.group(4)}{telefon.group(5)} {telefon.group(6)}.{telefon.group(7)}'
-  print(contacts_list[n][5])
-  contacts_list[n][5] = contacts_list[n][5].replace('None.', '')
-print(contacts_list[n][5])
+  #ищем телефон
+  telefon = re.search(pattern_telefon, ','.join(list))
+  if telefon != None:
+    list[5] = f'+7({telefon.group(2)}){telefon.group(3)}{telefon.group(4)}{telefon.group(5)} {telefon.group(6)}.{telefon.group(7)}'
+    list[5] = list[5].replace('None.', '')
+    list[5] = list[5].strip()
+  print(list)
 
 
 
