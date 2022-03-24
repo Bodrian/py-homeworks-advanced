@@ -9,12 +9,17 @@ class Mylist:
 		self.nested_list = nested_list
 
 	def __iter__(self):
-		return self
+		i = 0
+		list = []
+		while i != len(nested_list):
+			list += nested_list[i]
+			i += 1
+		return list
 
-	def __next__(self):
-		if len(nested_list) == 0:
+	def __next__(self, list):
+		if len(list) == 0:
 			raise StopIteration
-		return nested_list.pop()
+		return list.pop()
 
 
 
