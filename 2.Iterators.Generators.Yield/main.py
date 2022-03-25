@@ -7,20 +7,17 @@ nested_list = [
 class Mylist:
 	def __init__(self, nested_list):
 		self.nested_list = nested_list
-		self.list = []
-		self.i = 0
 
 	def __iter__(self):
+		self.list = []
+		for item in self.nested_list:
+			self.list += item
 		return self
 
 	def __next__(self):
-		while self.i != len(nested_list):
-			self.list += nested_list[self.i]
-			self.i += 1
 		if len(self.list) == 0:
 			raise StopIteration
-		return self.list.pop(0)
-
+		return self.list.pop()
 
 
 for item in Mylist(nested_list):
