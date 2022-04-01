@@ -1,7 +1,3 @@
-
-# Написать декоратор - логгер. Он записывает в файл дату и время вызова функции,
-# имя функции, аргументы, с которыми вызвалась и возвращаемое значение.
-
 from time import asctime
 
 def decor(log_path):
@@ -18,7 +14,7 @@ def decor(log_path):
 decor_log = decor('log1/')
 
 @decor_log # task1 + task2
-def summ(a = 1, b = 2, c = 3):
+def summ(a, b, c):
     return a + b + c
 
 if __name__ == "__main__":
